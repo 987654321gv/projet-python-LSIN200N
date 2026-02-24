@@ -3,90 +3,95 @@
 """
 from tkinter import *
 import random
-from math import sqrt,ceil
-class mastermind(Frame):
-    def __init__(self,boss=None):
-        Frame.__init__(self,boss)
+from math import sqrt, ceil
+
+
+class Mastermind(Frame):
+    def __init__(self, boss=None):
+        Frame.__init__(self, boss)
         self.pack()
         #### valeurs arbitraires ####
-        self.couleurs=['#ffffff','#000000','#ff0000','#00ff00','#0000ff','#ffff00']
-        self.couleur_vide='#553823'
-        self.nb_emplacements=4
-        self.dico_reponce = {0:'#ffffff',1: '#000000'}
+        self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00']
+        self.couleur_vide = '#553823'
+        self.nb_emplacements = 4
+        self.dico_reponce = {0: '#ffffff', 1: '#000000'}
         #### initialisations ####
-        self.emplacements=[]
-        self.emplacement_actif=0
+        self.emplacements = []
+        self.emplacement_actif = 0
         self.essais = -1
         self.prec_essai = []
-        self.emplacements_prec_essai=[]
+        self.emplacements_prec_essai = []
         self.master.title('codage')
         #### valeurs précalculées ####
-        self.nb_couleurs=len(self.couleurs)
-        self.nb_max=max(self.nb_emplacements,self.nb_couleurs-1)
-        self.endroit_emplacement=max((self.nb_couleurs - self.nb_emplacements) // 2,1)
+        self.nb_couleurs = len(self.couleurs)
+        self.nb_max = max(self.nb_emplacements, self.nb_couleurs - 1)
+        self.endroit_emplacement = max((self.nb_couleurs - self.nb_emplacements) // 2, 1)
         self.endroit_couleurs = max((self.nb_emplacements - self.nb_couleurs) // 2, 0)
-        if self.nb_couleurs<=self.nb_emplacements:self.endroit_couleurs+=1
-        self.fin_couleurs=self.endroit_couleurs+self.nb_couleurs-1
-        self.side=ceil(sqrt(self.nb_emplacements))
-        self.coins=(10,55)
-        if self.side>2:
-            self.coins=tuple(10+(((55-self.side*5)*i)//(self.side-1)) for i in range(self.side))
+        if self.nb_couleurs <= self.nb_emplacements: self.endroit_couleurs += 1
+        self.fin_couleurs = self.endroit_couleurs + self.nb_couleurs - 1
+        self.side = ceil(sqrt(self.nb_emplacements))
+        self.coins = (10, 55)
+        if self.side > 2:
+            self.coins = tuple(10 + (((55 - self.side * 5) * i) // (self.side - 1)) for i in range(self.side))
         #### intialisation GUI ####
         for i in range(self.nb_emplacements):
-
-            self.emplacements_prec_essai.append(Frame(self, height=75,width=75))
+            self.emplacements_prec_essai.append(Frame(self, height=75, width=75))
             self.emplacements_prec_essai[-1].grid(row=1, column=self.endroit_emplacement + i, sticky=NSEW)
-            self.emplacements.append(Frame(self, height=75,width=75, bg=self.couleur_vide))
+            self.emplacements.append(Frame(self, height=75, width=75, bg=self.couleur_vide))
             self.emplacements[-1].grid(row=0, column=self.endroit_emplacement + i, sticky=EW)
-        for i,c in enumerate(self.couleurs):
-            Button(self, background=c,width=10,height=2,command=lambda couleur=i:self.jouer(couleur)).grid(row=2, column=i+self.endroit_couleurs, sticky=EW)
-        Button(self,text='annuler', command=self.annuler).grid(row=3, column=self.nb_max//2,columnspan=1 if self.nb_couleurs%2 else 2)
+        for i, c in enumerate(self.couleurs):
+            Button(self, background=c, width=10, height=2, command=lambda couleur=i: self.jouer(couleur)) \
+                .grid(row=2, column=i + self.endroit_couleurs, sticky=EW)
+        Button(self, text='annuler', command=self.annuler).grid(row=3, column=self.nb_max // 2,
+                                                                columnspan=1 if self.nb_couleurs % 2 else 2)
         Button(self, text='rejouer', command=self.rejouer).grid(row=3, column=self.endroit_couleurs)
         Button(self, text='quiter', command=self.quit).grid(row=3, column=self.fin_couleurs)
-        self.ale=Button(self,text='code aléatoire', command=self.rand)
-        self.ale.grid(row=4,column=self.nb_max//2,columnspan=1 if self.nb_couleurs%2 else 2)
+        self.ale = Button(self, text='code aléatoire', command=self.rand)
+        self.ale.grid(row=4, column=self.nb_max // 2, columnspan=1 if self.nb_couleurs % 2 else 2)
 
-    def jouer(self,couleur):
+    def jouer(self, couleur):
         self.emplacements[self.emplacement_actif].configure(bg=self.couleurs[couleur])
-        self.emplacement_actif+=1
+        self.emplacement_actif += 1
         self.prec_essai.append(couleur)
         if self.emplacement_actif != self.nb_emplacements: return
 
-        self.emplacement_actif=0
-        self.essais+=1
+        self.emplacement_actif = 0
+        self.essais += 1
         if self.essais:
             for e in range(self.nb_emplacements):
                 self.emplacements_prec_essai[e].configure(bg=self.couleurs[self.prec_essai[e]])
-            if self.reponce==self.prec_essai:
-                Label(Tk(),text=f'gagné en {self.essais} essais').pack()
-            rep=[]
-            for i,e in enumerate(self.prec_essai):
-                if self.reponce[i]==e:
+            if self.reponse == self.prec_essai:
+                Label(Tk(), text=f'gagné en {self.essais} essais').pack()
+            rep = []
+            for i, e in enumerate(self.prec_essai):
+                if self.reponse[i] == e:
                     rep.append(1)
-                elif e in self.reponce:
+                elif e in self.reponse:
                     rep.append(0)
-                else:rep.append(None)
-            rep.extend([None]*((self.side**2)-len(rep)))
+                else:
+                    rep.append(None)
+            rep.extend([None] * ((self.side ** 2) - len(rep)))
             self.can.delete(ALL)
 
-
             random.shuffle(rep)
-            for i,p in enumerate(rep):
-                if p!=None:
-                    self.can.create_oval(self.coins[i%self.side],self.coins[i//self.side],
-                                         self.coins[i%self.side]+self.side*5,self.coins[i//self.side]+self.side*5,
+            for i, p in enumerate(rep):
+                if p is not None:
+                    self.can.create_oval(self.coins[i % self.side], self.coins[i // self.side],
+                                         self.coins[i % self.side] + self.side * 5,
+                                         self.coins[i // self.side] + self.side * 5,
                                          fill=self.dico_reponce[p])
         else:
             self.enregister_reponce(self.prec_essai)
         self.wipe_prec_essai()
 
     def annuler(self):
-        if self.emplacement_actif==0: return
+        if self.emplacement_actif == 0: return
         self.emplacement_actif -= 1
         self.emplacements[self.emplacement_actif].configure(bg=self.couleur_vide)
         self.prec_essai.pop()
+
     def rejouer(self):
-        if self.essais==-1:return
+        if self.essais == -1: return
         self.emplacement_actif = 0
         self.essais = -1
         self.prec_essai = []
@@ -94,26 +99,31 @@ class mastermind(Frame):
         self.can.destroy()
         self.ale = Button(self, text='code aléatoire', command=self.rand)
         self.ale.grid(row=4, column=0, columnspan=self.nb_couleurs)
-        for ep,e in zip(self.emplacements_prec_essai,self.emplacements):
+        for ep, e in zip(self.emplacements_prec_essai, self.emplacements):
             ep.configure(bg='#eeeeee')
             e.configure(bg=self.couleur_vide)
+
     def rand(self):
-        self.enregister_reponce([random.randint(0,self.nb_couleurs-1) for _ in range(len(self.emplacements))])
+        self.enregister_reponce([random.randint(0, self.nb_couleurs - 1) for _ in range(len(self.emplacements))])
         self.wipe_prec_essai()
         self.essais = 0
-        self.emplacement_actif=0
-    def enregister_reponce(self,reponse):
+        self.emplacement_actif = 0
+
+    def enregister_reponce(self, reponse):
         self.master.title('jeu')
-        self.reponce = reponse
+        self.reponse = reponse
         self.can = Canvas(self, height=75, bg='#aaaaaa', width=75)
-        self.can.grid(row=1, column=self.endroit_emplacement-1, sticky=EW)
+        self.can.grid(row=1, column=self.endroit_emplacement - 1, sticky=EW)
         self.ale.destroy()
+
     def wipe_prec_essai(self):
         for e in self.emplacements:
             e.configure(bg=self.couleur_vide)
         self.prec_essai = []
+
+
 if __name__ == '__main__':
     f = Tk()
-    f.resizable(width=0,height=0)
-    mastermind(f)
+    f.resizable(width=0, height=0)
+    Mastermind(f)
     f.mainloop()
