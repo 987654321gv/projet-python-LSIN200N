@@ -12,12 +12,13 @@ class Mastermind(Frame):
         Frame.__init__(self, boss)
         self.pack()
         #### valeurs arbitraires ####
-        self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00']
+        self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00','#00aaee','#ffaaee']
         self.couleur_vide = '#553823'
         self.nb_emplacements = 4
         self.dico_reponce = {0: '#ffffff', 1: '#000000'}
         self.version_alt = False
         self.chaos_degree=2
+        self.essais_max=10
         #### initialisations ####
         self.emplacements = []
         self.emplacement_actif = 0
@@ -64,6 +65,9 @@ class Mastermind(Frame):
                 self.emplacements_prec_essai[e].configure(bg=self.couleurs[self.prec_essai[e]])
             if self.reponse == self.prec_essai:
                 Label(Tk(), text=f'gagné en {self.essais} essais').pack()
+            if self.essais>=self.essais_max:
+                Label(Tk(), text='perdu !').pack()
+                return
             rep = []
             if not self.version_alt:
                 rep=[0]*sum((Counter(self.prec_essai)&self.count_reponse).values())

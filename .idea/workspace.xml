@@ -162,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1771959097952</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="bugfix du mod alt et ajout du degré de chaos">
+      <created>1772024431661</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1772024431661</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,29 +211,30 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
     <MESSAGE value="bugfix" />
     <MESSAGE value="cleaning" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaning" />
+    <MESSAGE value="bugfix du mod alt et ajout du degré de chaos" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix du mod alt et ajout du degré de chaos" />
   </component>
   <component name="WindowStateProjectService">
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog" timestamp="1771946146087">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1771946146087" />
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1772024204057">
+    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1772026458213">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
-    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1772024204057">
+    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1772026458213" />
+    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1772026458213">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
-    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1772024204057">
+    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1772026458213" />
+    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1772026458213">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
-    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1772024204057">
+    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1772026458213" />
+    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1772026458213">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
+    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1772026458213" />
     <state x="86" y="37" key="MergeDialog" timestamp="1771945633621">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -243,10 +251,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1771773047098" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1771959102290">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1772024437292">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1771959102290" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1772024437292" />
     <state x="381" y="53" key="git4idea.branch.GitSmartOperationDialog" timestamp="1771773963703">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
