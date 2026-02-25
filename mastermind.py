@@ -17,6 +17,7 @@ class Mastermind(Frame):
         self.nb_emplacements = 4
         self.dico_reponce = {0: '#ffffff', 1: '#000000'}
         self.version_alt = False
+        self.chaos_degree=2
         #### initialisations ####
         self.emplacements = []
         self.emplacement_actif = 0
@@ -59,29 +60,27 @@ class Mastermind(Frame):
         self.emplacement_actif = 0
         self.essais += 1
         if self.essais:
-            counter_local = self.count_reponse
             for e in range(self.nb_emplacements):
                 self.emplacements_prec_essai[e].configure(bg=self.couleurs[self.prec_essai[e]])
             if self.reponse == self.prec_essai:
                 Label(Tk(), text=f'gagné en {self.essais} essais').pack()
             rep = []
+            if not self.version_alt:
+                rep=[0]*sum((Counter(self.prec_essai)&self.count_reponse).values())
             for i, e in enumerate(self.prec_essai):
                 if self.reponse[i] == e:
                     rep.append(1)
                     if not self.version_alt:
-                        if e not in counter_local:
-                            rep.remove(0)
-                        counter_local -= Counter((e,))
-                elif e in counter_local:
+                        rep.remove(0)
+                elif e in self.reponse and self.version_alt:
                     rep.append(0)
-                    if not self.version_alt:
-                        counter_local -= Counter((e,))
-                else:
-                    rep.append(None)
-            rep.extend([None] * ((self.side ** 2) - len(rep)))
+            if self.chaos_degree==2:
+                rep.extend([None] * ((self.side ** 2) - len(rep)))
             self.can.delete(ALL)
-
-            random.shuffle(rep)
+            if self.chaos_degree!=0:
+                random.shuffle(rep)
+            elif self.version_alt:
+                rep.sort()
             for i, p in enumerate(rep):
                 if p is not None:
                     self.can.create_oval(self.coins[i % self.side], self.coins[i // self.side],

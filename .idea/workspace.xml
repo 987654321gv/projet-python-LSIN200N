@@ -148,7 +148,21 @@
       <option name="project" value="LOCAL" />
       <updated>1771947508831</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="bugfix">
+      <created>1771958958102</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1771958958102</updated>
+    </task>
+    <task id="LOCAL-00010" summary="cleaning">
+      <created>1771959097952</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771959097952</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,32 +200,33 @@
     <MESSAGE value="restructuration et modularisation&#10;&#10;restructuration et modification pour que modifier le nombre de couleurs/d'emplacements (fonctionne pas encore)" />
     <MESSAGE value="anotation des intialisations" />
     <MESSAGE value="modularisation&#10;&#10;Le nombre de couleurs et d'emplacements peut désormais être modifié" />
-    <MESSAGE value="cleaning" />
     <MESSAGE value="ajout version alt" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'" />
+    <MESSAGE value="bugfix" />
+    <MESSAGE value="cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaning" />
   </component>
   <component name="WindowStateProjectService">
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog" timestamp="1771946146087">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1771946146087" />
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1771958931282">
+    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1772024204057">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1771958931282" />
-    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1771958931282">
+    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
+    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1772024204057">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1771958931282" />
-    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1771958931282">
+    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
+    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1772024204057">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1771958931282" />
-    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1771958931282">
+    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
+    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1772024204057">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1771958931282" />
+    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1772024204057" />
     <state x="86" y="37" key="MergeDialog" timestamp="1771945633621">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -228,10 +243,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1771773047098" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1771947521272">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1771959102290">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1771947521272" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1771959102290" />
     <state x="381" y="53" key="git4idea.branch.GitSmartOperationDialog" timestamp="1771773963703">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
