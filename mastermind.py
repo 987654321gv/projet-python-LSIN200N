@@ -26,6 +26,7 @@ class Mastermind(Frame):
         self.canvases: list[Canvas] = []
         self.emplacements: list[Frame] = []
         self.historique: list[Frame] = []
+        self.boutons_couleurs: list[Button]=[]
         self.IA_2nd_try_opti=False
         self.rep_hist = []
         self.emplacement_actif = 0
@@ -48,8 +49,8 @@ class Mastermind(Frame):
             self.emplacements.append(Frame(self, height=75, width=75, bg=self.couleur_vide))
             self.emplacements[-1].grid(row=0, column=self.endroit_emplacement + i, sticky=EW)
         for i, c in enumerate(self.couleurs):
-            Button(self, background=c, width=10, height=2, command=lambda couleur=i: self.jouer(couleur)) \
-                .grid(row=self.essais_max + 1, column=i + self.endroit_couleurs, sticky=EW)
+            self.boutons_couleurs.append(Button(self, background=c, width=10, height=2, command=lambda couleur=i: self.jouer(couleur)))
+            self.boutons_couleurs[-1].grid(row=self.essais_max + 1, column=i + self.endroit_couleurs, sticky=EW)
         Button(self, text='annuler', command=self.annuler).grid(row=self.essais_max + 2, column=self.nb_max // 2,
                                                                 columnspan=1 if self.nb_couleurs % 2 else 2)
         Button(self, text='rejouer', command=self.rejouer).grid(row=self.essais_max + 2, column=self.endroit_couleurs)
@@ -181,7 +182,8 @@ class Mastermind(Frame):
     def suggestion(self):
         e = IA_draft.set_solutions_possibles.pop()
         IA_draft.set_solutions_possibles.add(e)
-        print(e)  # TODO il faudra trouver un meilleur affichage + tard
+        for c in e:
+            self.boutons_couleurs[c].flash()
 
     def IA(self):
         if self.IA_2nd_try_opti:
