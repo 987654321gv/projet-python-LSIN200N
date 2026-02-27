@@ -128,7 +128,7 @@ class Mastermind(Frame):
         self.ale = Button(self, text='code aléatoire', command=self.rand)
         self.ale.grid(row=self.essais_max + 3, column=0, columnspan=self.nb_couleurs)
         for ep, e in zip(self.historique, self.emplacements):
-            ep.configure(bg='#eeeeee')
+            ep.destroy()
             e.configure(bg=self.couleur_vide)
 
     def rand(self):
