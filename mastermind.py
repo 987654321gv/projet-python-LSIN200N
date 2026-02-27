@@ -24,7 +24,7 @@ class Mastermind(Frame):
         self.canvases: list[Canvas] = []
         self.emplacements: list[Frame] = []
         self.historique: list[Frame] = []
-        self.rep_hist=[]
+        self.rep_hist = []
         self.emplacement_actif = 0
         self.essais = -1
         self.prec_essai = []
@@ -69,20 +69,20 @@ class Mastermind(Frame):
                 self.historique.append(case)
             if self.winfo_screenheight() * 3 < self.winfo_reqheight() * 4:
                 for e in self.historique:
-                    e.configure(height=e.winfo_reqwidth()//2)
-                for c,(r0,r1) in zip(self.canvases,self.rep_hist):
+                    e.configure(height=e.winfo_reqwidth() // 2)
+                for c, (r0, r1) in zip(self.canvases, self.rep_hist):
                     if r1 or r0:
-                        Frame(self,background=self.couleur_vide)\
-                            .grid(row=c.grid_info()['row'],column=self.endroit_emplacement - 1,sticky=NSEW)
+                        Frame(self, background=self.couleur_vide) \
+                            .grid(row=c.grid_info()['row'], column=self.endroit_emplacement - 1, sticky=NSEW)
                     if r0:
-                        Label(self,text=str(r0),foreground='#ffffff',background=self.couleur_vide)\
-                            .grid(row=c.grid_info()['row'],column=self.endroit_emplacement - 1,sticky=W)
+                        Label(self, text=str(r0), foreground='#ffffff', background=self.couleur_vide) \
+                            .grid(row=c.grid_info()['row'], column=self.endroit_emplacement - 1, sticky=W)
                     if r1:
-                        Label(self, text=str(r1),background=self.couleur_vide) \
+                        Label(self, text=str(r1), background=self.couleur_vide) \
                             .grid(row=c.grid_info()['row'], column=self.endroit_emplacement - 1, sticky=E)
 
                     c.destroy()
-                self.canvases=[]
+                self.canvases = []
             if self.reponse == self.prec_essai:
                 Label(Tk(), text=f'gagné en {self.essais} essais').pack()
             if self.essais >= self.essais_max:
@@ -90,19 +90,19 @@ class Mastermind(Frame):
                 for e, r in zip(self.emplacements, self.reponse):
                     e.configure(bg=self.couleurs[r])
                 return
-            r0=0
-            r1=0
+            r0 = 0
+            r1 = 0
             if not self.version_alt:
-                r0=sum((Counter(self.prec_essai) & self.count_reponse).values())
+                r0 = sum((Counter(self.prec_essai) & self.count_reponse).values())
             for i, e in enumerate(self.prec_essai):
                 if self.reponse[i] == e:
-                    r1+=1
+                    r1 += 1
                     if not self.version_alt:
-                        r0-=1
+                        r0 -= 1
                 elif e in self.reponse and self.version_alt:
-                    r0+=1
-            self.rep_hist.append((r0,r1))
-            rep=[0]*r0+[1]*r1
+                    r0 += 1
+            self.rep_hist.append((r0, r1))
+            rep = [0] * r0 + [1] * r1
             if self.chaos_degree == 2:
                 rep.extend([None] * ((self.side ** 2) - len(rep)))
 
@@ -145,7 +145,6 @@ class Mastermind(Frame):
             ep.destroy()
         for e in self.emplacements:
             e.configure(bg=self.couleur_vide)
-
 
     def rand(self):
         self.enregister_reponce([random.randint(0, self.nb_couleurs - 1) for _ in range(len(self.emplacements))])
