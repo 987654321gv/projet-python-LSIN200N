@@ -26,8 +26,8 @@ class Mastermind(Frame):
         self.canvases: list[Canvas] = []
         self.emplacements: list[Frame] = []
         self.historique: list[Frame] = []
-        self.boutons_couleurs: list[Button]=[]
-        self.IA_2nd_try_opti=False
+        self.boutons_couleurs: list[Button] = []
+        self.IA_2nd_try_opti = False
         self.rep_hist = []
         self.emplacement_actif = 0
         self.essais = -1
@@ -49,7 +49,8 @@ class Mastermind(Frame):
             self.emplacements.append(Frame(self, height=75, width=75, bg=self.couleur_vide))
             self.emplacements[-1].grid(row=0, column=self.endroit_emplacement + i, sticky=EW)
         for i, c in enumerate(self.couleurs):
-            self.boutons_couleurs.append(Button(self, background=c, width=10, height=2, command=lambda couleur=i: self.jouer(couleur)))
+            self.boutons_couleurs.append(
+                Button(self, background=c, width=10, height=2, command=lambda couleur=i: self.jouer(couleur)))
             self.boutons_couleurs[-1].grid(row=self.essais_max + 1, column=i + self.endroit_couleurs, sticky=EW)
         Button(self, text='annuler', command=self.annuler).grid(row=self.essais_max + 2, column=self.nb_max // 2,
                                                                 columnspan=1 if self.nb_couleurs % 2 else 2)
@@ -67,9 +68,10 @@ class Mastermind(Frame):
         self.essais += 1
         if self.essais:
             if self.IA_active:
-                if self.essais==1 and self.prec_essai==[0,1,2,3]:
-                    self.IA_2nd_try_opti=True
-                else:self.IA_2nd_try_opti=False
+                if self.essais == 1 and self.prec_essai == [0, 1, 2, 3]:
+                    self.IA_2nd_try_opti = True
+                else:
+                    self.IA_2nd_try_opti = False
             if self.IA_active:
                 IA_draft.update_solutions(self.reponse, self.prec_essai)
             row = self.essais_max - self.essais
