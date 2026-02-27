@@ -1,4 +1,3 @@
-
 """
 
 """
@@ -13,13 +12,13 @@ class Mastermind(Frame):
         Frame.__init__(self, boss)
         self.pack()
         #### valeurs arbitraires ####
-        self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00','#00aaee','#ffaaee']
+        self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00aaee', '#ffaaee']
         self.couleur_vide = '#553823'
         self.nb_emplacements = 4
         self.dico_reponce = {0: '#ffffff', 1: '#000000'}
         self.version_alt = False
-        self.chaos_degree=2
-        self.essais_max=10
+        self.chaos_degree = 2
+        self.essais_max = 10
         #### initialisations ####
         self.canvases = []
         self.emplacements = []
@@ -61,26 +60,26 @@ class Mastermind(Frame):
         self.emplacement_actif = 0
         self.essais += 1
         if self.essais:
-            row = self.essais_max-self.essais
+            row = self.essais_max - self.essais
             for i, couleur in enumerate(self.prec_essai):
                 case = Frame(self,
-                            height=75,
-                            width=75,
-                            bg=self.couleurs[couleur])
+                             height=75,
+                             width=75,
+                             bg=self.couleurs[couleur])
                 case.grid(row=row,
-                        column=self.endroit_emplacement + i,
-                        sticky=NSEW)
+                          column=self.endroit_emplacement + i,
+                          sticky=NSEW)
                 self.historique.append(case)
             if self.reponse == self.prec_essai:
                 Label(Tk(), text=f'gagné en {self.essais} essais').pack()
-            if self.essais>=self.essais_max:
+            if self.essais >= self.essais_max:
                 Label(Tk(), text='perdu !').pack()
-                for e,r in zip(self.emplacements,self.reponse):
+                for e, r in zip(self.emplacements, self.reponse):
                     e.configure(bg=self.couleurs[r])
                 return
             rep = []
             if not self.version_alt:
-                rep=[0]*sum((Counter(self.prec_essai)&self.count_reponse).values())
+                rep = [0] * sum((Counter(self.prec_essai) & self.count_reponse).values())
             for i, e in enumerate(self.prec_essai):
                 if self.reponse[i] == e:
                     rep.append(1)
@@ -88,25 +87,25 @@ class Mastermind(Frame):
                         rep.remove(0)
                 elif e in self.reponse and self.version_alt:
                     rep.append(0)
-            if self.chaos_degree==2:
+            if self.chaos_degree == 2:
                 rep.extend([None] * ((self.side ** 2) - len(rep)))
-            
+
             can = Canvas(self, height=75, bg='#aaaaaa', width=75)
             can.grid(row=row,
                      column=self.endroit_emplacement - 1,
                      sticky=EW)
             self.canvases.append(can)
 
-            if self.chaos_degree!=0:
+            if self.chaos_degree != 0:
                 random.shuffle(rep)
             elif self.version_alt:
                 rep.sort()
             for i, p in enumerate(rep):
                 if p is not None:
                     can.create_oval(self.coins[i % self.side], self.coins[i // self.side],
-                                         self.coins[i % self.side] + self.side * 5,
-                                         self.coins[i // self.side] + self.side * 5,
-                                         fill=self.dico_reponce[p])
+                                    self.coins[i % self.side] + self.side * 5,
+                                    self.coins[i // self.side] + self.side * 5,
+                                    fill=self.dico_reponce[p])
         else:
             self.enregister_reponce(self.prec_essai)
         self.wipe_prec_essai()
@@ -152,6 +151,6 @@ class Mastermind(Frame):
 
 if __name__ == '__main__':
     f = Tk()
-    #f.resizable(width=0, height=0)
+    f.resizable(width=0, height=0)
     Mastermind(f)
     f.mainloop()
