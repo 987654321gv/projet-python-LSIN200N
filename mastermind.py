@@ -6,12 +6,19 @@ import random
 from math import sqrt, ceil
 from collections import Counter
 import IA_draft
+from json import load, dump
 
 
 class Mastermind(Frame):
     def __init__(self, boss=None):
         Frame.__init__(self, boss)
         self.pack()
+        self.parametres_vars = {"version_alt": BooleanVar(),
+                                "IA_active": BooleanVar()}
+        self.setup_menu()
+        with open("parametres.txt", "r") as parametres:
+            self.parametres = load(parametres)
+            print(self.parametres)
 
         #### valeurs arbitraires ####
         self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00aaee', '#ffaaee']
@@ -149,6 +156,11 @@ class Mastermind(Frame):
         self.emplacements[self.emplacement_actif].configure(bg=self.couleur_vide)
         self.prec_essai.pop()
 
+    def sauguarder_les_option(self):
+        dico_params={e:self.parametres_vars[e].get() for e in self.parametres_vars}
+        with open("parametres.txt", "w") as parametres:
+            dump(dico_params, parametres)
+
     def rejouer(self):
         if self.essais == -1: return
         self.emplacement_actif = 0
@@ -169,8 +181,8 @@ class Mastermind(Frame):
         self.historique = []
         self.destroy_on_replay = []
         if self.IA_active:
-            IA_draft.set_solutions_possibles=IA_draft.set_solutions.copy()
-            self.IA_2nd_try_opti=False
+            IA_draft.set_solutions_possibles = IA_draft.set_solutions.copy()
+            self.IA_2nd_try_opti = False
 
     def rand(self):
         self.enregister_reponce([random.randint(0, self.nb_couleurs - 1) for _ in range(len(self.emplacements))])
@@ -207,6 +219,17 @@ class Mastermind(Frame):
         else:
             for e in IA_draft.IA()[0]:
                 self.jouer(e)
+
+    def setup_menu(self):
+        self.master.option_add('*tearOff', FALSE)
+        menubar = Menu(self.master)
+        self.master.config(menu=menubar)
+        menubar.add_command(label='Sauveguarder les options', command=self.sauguarder_les_option, underline=0)
+        menu_parametres = Menu(menubar)
+        menubar.add_cascade(label='Parametres', menu=menu_parametres)
+        for param in self.parametres_vars:
+            if isinstance(self.parametres_vars[param],BooleanVar):
+                menu_parametres.add_checkbutton(label=param,variable=self.parametres_vars[param])
 
 
 if __name__ == '__main__':
