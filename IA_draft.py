@@ -31,9 +31,9 @@ set_solutions_possibles = set_solutions
 
 def IA(is_2nd_try=False):
     if is_2nd_try:
-        essai={256: (5, 6, 7, 5), 500: (5, 5, 4, 4), 976: (5, 5, 4, 4), 936: (1, 2, 0, 6), 224: (3, 2, 6, 2),
-               72: (0, 2, 4, 6), 660: (5, 1, 7, 3), 204: (2, 1, 1, 2), 216: (0, 2, 4, 6), 28: (0, 2, 4, 6),
-               6: (2, 1, 1, 0), 9: (3, 2, 6, 2), 8: (2, 1, 1, 0), 1: (0, 1, 2, 3)}[len(set_solutions_possibles)]
+        essai = {256: (5, 6, 7, 5), 500: (5, 5, 4, 4), 976: (5, 5, 4, 4), 936: (1, 2, 0, 6), 224: (3, 2, 6, 2),
+                 72: (0, 2, 4, 6), 660: (5, 1, 7, 3), 204: (2, 1, 1, 2), 216: (0, 2, 4, 6), 28: (0, 2, 4, 6),
+                 6: (2, 1, 1, 0), 9: (3, 2, 6, 2), 8: (2, 1, 1, 0), 1: (0, 1, 2, 3)}[len(set_solutions_possibles)]
         dict_reps = {}
         for solution in set_solutions_possibles:
             rep = get_rep(solution, essai)
@@ -110,7 +110,7 @@ def voir_2e_coups():
     for rep in dict_reps:
         set_solutions_possibles = dict_reps[rep]
         dict_essais[len(set_solutions_possibles)] = IA()[0]
-        print(rep, dict_essais[len(set_solutions_possibles)],len(set_solutions_possibles))
+        print(rep, dict_essais[len(set_solutions_possibles)], len(set_solutions_possibles))
     print(dict_essais)
 
 

@@ -14,11 +14,18 @@ class Mastermind(Frame):
         Frame.__init__(self, boss)
         self.pack()
         self.parametres_vars = {"version_alt": BooleanVar(),
-                                "IA_active": BooleanVar()}
-        self.setup_menu()
+                                "IA_active": BooleanVar(),
+                                "nb_emplacements": IntVar(),
+                                "essais_max": IntVar(),
+                                "chaos_degree": bounded_IntVar(3)}
+        self.parametres = {"version_alt": False,
+                           "IA_active": True,
+                           "nb_emplacements": 4,
+                           "essais_max": 10,
+                           "chaos_degree": 2}
         with open("parametres.txt", "r") as parametres:
-            self.parametres = load(parametres)
-            print(self.parametres)
+            self.parametres |= load(parametres)
+        self.setup_menu()
 
         #### valeurs arbitraires ####
         self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00aaee', '#ffaaee']
@@ -157,7 +164,7 @@ class Mastermind(Frame):
         self.prec_essai.pop()
 
     def sauguarder_les_option(self):
-        dico_params={e:self.parametres_vars[e].get() for e in self.parametres_vars}
+        dico_params = {e: self.parametres_vars[e].get() for e in self.parametres_vars}
         with open("parametres.txt", "w") as parametres:
             dump(dico_params, parametres)
 
@@ -227,9 +234,26 @@ class Mastermind(Frame):
         menubar.add_command(label='Sauveguarder les options', command=self.sauguarder_les_option, underline=0)
         menu_parametres = Menu(menubar)
         menubar.add_cascade(label='Parametres', menu=menu_parametres)
-        for param in self.parametres_vars:
-            if isinstance(self.parametres_vars[param],BooleanVar):
-                menu_parametres.add_checkbutton(label=param,variable=self.parametres_vars[param])
+        for i, (param, var) in enumerate(self.parametres_vars.items()):
+            var.set(self.parametres[param])
+            if isinstance(var, BooleanVar):
+                menu_parametres.add_checkbutton(label=param, variable=var)
+            if isinstance(var, IntVar):
+                new_menu = Menu(menu_parametres)
+                menu_parametres.add_cascade(label=f'{param} : {var.get()}', menu=new_menu)
+                new_menu.add_command(label='+', command=lambda:
+                (var.set(var.get() + 1), menu_parametres.entryconfigure(i, label=f'{param} : {var.get()}')))
+                new_menu.add_command(label='-', command=lambda:
+                (var.set(var.get() - 1), menu_parametres.entryconfigure(i, label=f'{param} : {var.get()}')))
+
+
+class bounded_IntVar(IntVar):
+    def __init__(self, max_value, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.max = max_value
+
+    def set(self, value):
+        super().set(value % self.max)
 
 
 if __name__ == '__main__':
