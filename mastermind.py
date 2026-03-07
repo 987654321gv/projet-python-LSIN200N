@@ -7,22 +7,28 @@ from math import sqrt, ceil
 from collections import Counter
 import IA_draft
 from json import load, dump
+import re
 
 
 class Mastermind(Frame):
     def __init__(self, boss=None):
         Frame.__init__(self, boss)
         self.pack()
-        self.parametres_vars = {"version_alt": BooleanVar(),
-                                "IA_active": BooleanVar(),
-                                "nb_emplacements": IntVar(),
-                                "essais_max": IntVar(),
-                                "chaos_degree": bounded_IntVar(3)}
-        self.parametres = {"version_alt": False,
-                           "IA_active": True,
-                           "nb_emplacements": 4,
-                           "essais_max": 10,
-                           "chaos_degree": 2}
+        self.parametres_vars = {"version alt": BooleanVar(),
+                                "IA active": BooleanVar(),
+                                "nb emplacements": IntVar(),
+                                "essais max": IntVar(),
+                                "chaos degree": bounded_IntVar(3),
+                                "couleur vide": ColorVar(),
+                                "couleurs": ListVar()}
+        self.parametres = {"version alt": False,
+                           "IA active": True,
+                           "nb emplacements": 4,
+                           "essais max": 10,
+                           "chaos degree": 2,
+                           "couleur vide": '#553823',
+                           "couleurs": ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00aaee',
+                                        '#ffaaee']}
         with open("parametres.txt", "r") as parametres:
             self.parametres |= load(parametres)
         self.setup_menu()
@@ -31,7 +37,7 @@ class Mastermind(Frame):
         self.couleurs = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00aaee', '#ffaaee']
         self.couleur_vide = '#553823'
         self.nb_emplacements = 4
-        self.dico_reponce = {0: '#ffffff', 1: '#000000'}
+        self.dico_reponce = ('#ffffff', '#000000')
         self.version_alt = False
         self.chaos_degree = 2
         self.essais_max = 10
@@ -70,7 +76,7 @@ class Mastermind(Frame):
         Button(self, text='annuler', command=self.annuler).grid(row=self.essais_max + 2, column=self.nb_max // 2,
                                                                 columnspan=1 if self.nb_couleurs % 2 else 2)
         Button(self, text='rejouer', command=self.rejouer).grid(row=self.essais_max + 2, column=self.endroit_couleurs)
-        Button(self, text='quiter', command=self.quit).grid(row=self.essais_max + 2, column=self.fin_couleurs)
+        Button(self, text='quiter', command=self.master.destroy).grid(row=self.essais_max + 2, column=self.fin_couleurs)
         self.ale = Button(self, text='code aléatoire', command=self.rand)
         self.ale.grid(row=self.essais_max + 3, column=self.nb_max // 2, columnspan=1 if self.nb_couleurs % 2 else 2)
 
@@ -235,16 +241,38 @@ class Mastermind(Frame):
         menu_parametres = Menu(menubar)
         menubar.add_cascade(label='Parametres', menu=menu_parametres)
         for i, (param, var) in enumerate(self.parametres_vars.items()):
+            self.setup_param(menu_parametres, i, param, var)
+
+    def setup_param(self, menu: Menu, i: int, param: str, var: Variable):
+        if param:
             var.set(self.parametres[param])
-            if isinstance(var, BooleanVar):
-                menu_parametres.add_checkbutton(label=param, variable=var)
-            if isinstance(var, IntVar):
-                new_menu = Menu(menu_parametres)
-                menu_parametres.add_cascade(label=f'{param} : {var.get()}', menu=new_menu)
-                new_menu.add_command(label='+', command=lambda:
-                (var.set(var.get() + 1), menu_parametres.entryconfigure(i, label=f'{param} : {var.get()}')))
-                new_menu.add_command(label='-', command=lambda:
-                (var.set(var.get() - 1), menu_parametres.entryconfigure(i, label=f'{param} : {var.get()}')))
+        if isinstance(var, BooleanVar):
+            menu.insert_checkbutton(i, label=param, variable=var)
+        if isinstance(var, IntVar):
+            new_menu = Menu(menu)
+            menu.insert_cascade(i, label=f'{param} : {var.get()}', menu=new_menu)
+            new_menu.add_command(label='+', command=lambda v=var, n=i, p=param, m=menu:
+            (v.set(v.get() + 1), m.entryconfigure(n, label=f'{p} : {v.get()}')))
+            new_menu.add_command(label='-', command=lambda v=var, n=i, p=param, m=menu:
+            (v.set(v.get() - 1), m.entryconfigure(n, label=f'{p} : {v.get()}')))
+        if isinstance(var, ColorVar):
+            if param:
+                menu.insert_command(i, label=f'{param} : {var.get()}', foreground=var.get(),
+                                    command=lambda v=var, n=i, p=param, m=menu: v.set_color(m, n, p))
+            else:
+                menu.insert_command(i, label=var.get(), foreground=var.get(),
+                                    command=lambda v=var, n=i, p=param, m=menu: v.set_color(m, n, p))
+
+        if isinstance(var, ListVar):
+            new_menu = Menu(menu)
+            menu.insert_cascade(i, label=param, menu=new_menu)
+            for n, v in enumerate(var.liste):
+                self.setup_param(new_menu, n, '', v)
+            new_menu.add_separator()
+            new_menu.add_command(label='-', command=lambda v=var, m=new_menu:
+            (print(v.pop()), print(v.get()), print(m.delete(len(v)))))
+            new_menu.add_command(label='+', command=lambda v=var, m=new_menu:
+            (v.append(type(v[-1])()), self.setup_param(m, len(v) - 1, '', v[-1])))
 
 
 class bounded_IntVar(IntVar):
@@ -254,6 +282,59 @@ class bounded_IntVar(IntVar):
 
     def set(self, value):
         super().set(value % self.max)
+
+
+class ColorVar(StringVar):
+    _default = '#000000'
+
+    def set_color(self, menu: Menu, index, param):
+        def func():
+            if not re.match("#[0-9a-f]{6}$", e.get()): return
+            self.set(e.get())
+            new_f.destroy()
+            if param:
+                menu.entryconfigure(index, label=f'{param} : {self.get()}', foreground=self.get())
+            else:
+                menu.entryconfigure(index, label=self.get(), foreground=self.get())
+
+        new_f = Tk()
+        e = Entry(new_f)
+        e.grid(row=0, column=1, sticky=NSEW)
+        e.insert(0, self.get())
+        Label(new_f, text='Entrez la valeur :').grid(row=0, column=0, sticky=NSEW)
+        Button(new_f, text='OK', command=func).grid(row=1, column=0, columnspan=2, sticky=NSEW)
+        new_f.mainloop()
+
+
+class ListVar(Variable):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.liste = []
+
+    def set(self, value):
+        res = []
+        for e in value:
+            if isinstance(e, list): res.append(ListVar(e))
+            if isinstance(e, int): res.append(IntVar(value=e))
+            if isinstance(e, bool): res.append(BooleanVar(value=e))
+            if isinstance(e, str) and re.match("#[0-9a-f]{6}$", e): res.append(ColorVar(value=e))
+
+        self.liste[:] = res
+
+    def get(self):
+        return [e.get() for e in self.liste]
+
+    def pop(self):
+        return self.liste.pop().get()
+
+    def append(self, item):
+        self.liste.append(item)
+
+    def __getitem__(self, index):
+        return self.liste[index]
+
+    def __len__(self):
+        return len(self.liste)
 
 
 if __name__ == '__main__':
