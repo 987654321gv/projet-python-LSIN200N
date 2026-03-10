@@ -26,7 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eff1dbb4-e10d-4ece-99b2-e8534ef815fb" name="Default Changelist" comment="bugfix">
+    <list default="true" id="eff1dbb4-e10d-4ece-99b2-e8534ef815fb" name="Default Changelist" comment="autocréation de parametres.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
     </list>
@@ -65,7 +65,7 @@
       <recent name="C:\Users\Elève\OneDrive\Documents\GitHub\projet-python-LSIN200N" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mastermind">
+  <component name="RunManager" selected="Python.mastermind (2)">
     <configuration name="IA_draft" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="projet-python-LSIN200N" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,6 +79,48 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/IA_draft.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mastermind (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="projet-python-LSIN200N" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/mastermind.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mastermind (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="projet-python-LSIN200N" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/mastermind (1).py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -131,9 +173,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mastermind (2)" />
         <item itemvalue="Python.mastermind" />
-        <item itemvalue="Python.IA_draft" />
-        <item itemvalue="Python.scratch_7" />
+        <item itemvalue="Python.mastermind (1)" />
         <item itemvalue="Python.IA_draft" />
         <item itemvalue="Python.scratch_7" />
       </list>
@@ -351,7 +393,14 @@
       <option name="project" value="LOCAL" />
       <updated>1773074958925</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="autocréation de parametres.txt">
+      <created>1773133193400</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1773133193400</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -408,7 +457,8 @@
     <MESSAGE value="bugfix&#10;&#10;solution à un bug qui survenait si on suprimait une couleur qu'on avait modifié" />
     <MESSAGE value="utilisation des parametres&#10;&#10;les parametres afectent maintenant les valeurs dans le programme" />
     <MESSAGE value="bugfix des squeeze après le 1er" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugfix des squeeze après le 1er" />
+    <MESSAGE value="autocréation de parametres.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="autocréation de parametres.txt" />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Intentions" timestamp="1773066576448">
@@ -423,22 +473,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="471" y="241" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog/0.0.1280.680@0.0.1280.680" timestamp="1772203938529" />
-    <state width="1259" height="217" key="GridCell.Tab.0.bottom" timestamp="1773132604886">
+    <state width="1259" height="217" key="GridCell.Tab.0.bottom" timestamp="1773145017105">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1773132604886" />
-    <state width="1259" height="217" key="GridCell.Tab.0.center" timestamp="1773132604886">
+    <state width="1259" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1773145017105" />
+    <state width="1259" height="217" key="GridCell.Tab.0.center" timestamp="1773145017105">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1773132604886" />
-    <state width="1259" height="217" key="GridCell.Tab.0.left" timestamp="1773132604886">
+    <state width="1259" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1773145017105" />
+    <state width="1259" height="217" key="GridCell.Tab.0.left" timestamp="1773145017104">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1773132604886" />
-    <state width="1259" height="217" key="GridCell.Tab.0.right" timestamp="1773132604886">
+    <state width="1259" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1773145017104" />
+    <state width="1259" height="217" key="GridCell.Tab.0.right" timestamp="1773145017105">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1773132604886" />
+    <state width="1259" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1773145017105" />
     <state x="86" y="37" key="MergeDialog" timestamp="1771945633621">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -455,10 +505,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1771773047098" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1773075625580">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1773133252043">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1773075625580" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1773133252043" />
     <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1773053380546">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

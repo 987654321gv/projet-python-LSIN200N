@@ -8,6 +8,7 @@ from collections import Counter
 import IA_draft
 from json import load, dump
 import re
+from tkinter import messagebox
 
 
 class Mastermind(Frame):
@@ -32,7 +33,8 @@ class Mastermind(Frame):
         try:
             with open("parametres.txt", "r") as parametres:
                 self.parametres |= load(parametres)
-        except FileNotFoundError:open("parametres.txt","w").close()
+        except FileNotFoundError:
+            open("parametres.txt", "w").close()
         self.setup_menu()
 
         #### valeurs arbitraires ####
@@ -50,6 +52,7 @@ class Mastermind(Frame):
         self.historique: list[Frame] = []
         self.boutons_couleurs: list[Button] = []
         self.destroy_on_replay = []
+        self.historique_ints = []
         self.IA_2nd_try_opti = False
         self.rep_hist = []
         self.emplacement_actif = 0
@@ -86,6 +89,7 @@ class Mastermind(Frame):
         self.emplacements[self.emplacement_actif].configure(bg=self.couleurs[couleur])
         self.emplacement_actif += 1
         self.prec_essai.append(couleur)
+        self.historique_ints.append(couleur)
         if self.emplacement_actif != self.nb_emplacements: return
         self.emplacement_actif = 0
         self.essais += 1
@@ -170,8 +174,9 @@ class Mastermind(Frame):
         self.emplacement_actif -= 1
         self.emplacements[self.emplacement_actif].configure(bg=self.couleur_vide)
         self.prec_essai.pop()
+        self.historique_ints.pop()
 
-    def sauguarder_les_option(self):
+    def saugarder_les_option(self):
         dico_params = {e: self.parametres_vars[e].get() for e in self.parametres_vars}
         with open("parametres.txt", "w") as parametres:
             dump(dico_params, parametres)
@@ -181,6 +186,7 @@ class Mastermind(Frame):
         self.emplacement_actif = 0
         self.essais = -1
         self.prec_essai = []
+        self.historique_ints = []
         self.master.title('codage')
         for can in self.canvases:
             can.destroy()
@@ -239,7 +245,7 @@ class Mastermind(Frame):
         self.master.option_add('*tearOff', FALSE)
         menubar = Menu(self.master)
         self.master.config(menu=menubar)
-        menubar.add_command(label='Sauvegarder les options', command=self.sauguarder_les_option, underline=0)
+        menubar.add_command(label='Sauvegarder les options', command=self.saugarder_les_option, underline=0)
         menu_parametres = Menu(menubar)
         menubar.add_cascade(label='Parametres', menu=menu_parametres)
         for i, (param, var) in enumerate(self.parametres_vars.items()):
@@ -274,6 +280,26 @@ class Mastermind(Frame):
             new_menu.add_command(label='-', command=lambda v=var, m=new_menu: (v.pop(), m.delete(len(v))))
             new_menu.add_command(label='+', command=lambda v=var, m=new_menu:
             (v.append(type(v[-1])()), self.setup_param(m, len(v) - 1, '', v[-1])))
+
+    def sauvegarder_partie(self):
+        data = {"historique": self.historique_ints}
+        with open("save.txt", "w") as f:
+            dump(data, f)
+        messagebox.showinfo("Sauvegarde", "Partie sauvegardée avec succès !")
+
+    def charger_partie(self):
+        try:
+            with open("save.txt", "r") as f:
+                data = load(f)
+        except FileNotFoundError:
+            messagebox.showerror("Erreur", "Aucune partie sauvegardée trouvée !")
+            return
+
+        self.rejouer()
+        for e in data["historique"]:
+            self.jouer(e)
+
+        messagebox.showinfo("Chargement", "Partie rechargée avec succès !")
 
 
 class bounded_IntVar(IntVar):
