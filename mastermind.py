@@ -285,10 +285,30 @@ class Mastermind(Frame):
             (v.append(type(v[-1])()), self.setup_param(m, len(v) - 1, '', v[-1])))
 
     def sauvegarder_partie(self):
-        data = {"historique": self.historique_ints}
-        with open("save.txt", "w") as f:
-            dump(data, f)
-        messagebox.showinfo("Sauvegarde", "Partie sauvegardée avec succès !")
+        sauv_fenetre = Toplevel(self)
+        sauv_fenetre.title("Sauvegarder une partie")
+        Label(sauv_fenetre, text="Nom de la partie :").pack(padx=50, pady=50)
+        nom_var = StringVar()
+        entry = Entry(sauv_fenetre, textvariable=nom_var)
+        entry.pack(padx=10, pady=5)
+
+        def sauvegarder():
+            nom_partie = nom_var.get().strip()
+            
+            # Lire le fichier existant
+            try:
+                with open("save.txt", "r") as f:
+                    data = load(f)
+            except FileNotFoundError:
+                data = {}
+
+            data[nom_partie] = self.historique_ints # Ajouter la nouvelle partie
+            # Écrire dans le fichier
+            with open("save.txt", "w") as f:
+                dump(data, f)
+            sauv_fenetre.destroy()
+            messagebox.showinfo("Sauvegarde", "Partie sauvegardée avec succès !")
+        Button(sauv_fenetre, text="Sauvegarder", command=sauvegarder).pack(padx=70, pady=50)
 
     def charger_partie(self):
         try:
@@ -298,11 +318,29 @@ class Mastermind(Frame):
             messagebox.showerror("Erreur", "Aucune partie sauvegardée trouvée !")
             return
 
-        self.rejouer()
-        for e in data["historique"]:
-            self.jouer(e)
+         # Créer la fenêtre pour choisir la partie
+        choix_fenetre = Toplevel(self)
+        choix_fenetre.title("Charger une partie")
 
-        messagebox.showinfo("Chargement", "Partie rechargée avec succès !")
+        nom_var = StringVar()
+        noms_parties = list(data.keys())
+        nom_var.set(noms_parties[0])  # valeur par défaut
+
+        menu = OptionMenu(choix_fenetre, nom_var, *noms_parties)
+        menu.pack(padx=100, pady=100)
+
+        def charger_selection():
+            partie = nom_var.get()
+            self.rejouer()  # réinitialiser le plateau
+
+            for e in data[partie]:
+                self.jouer(e)  # reconstruire le plateau avec les essais sauvegardés
+
+            choix_fenetre.destroy()
+            messagebox.showinfo("Chargement", f"Partie '{partie}' rechargée avec succès !")
+
+        bouton_charger = Button(choix_fenetre, text="Charger", command=charger_selection)
+        bouton_charger.pack(padx=10, pady=10)
 
 
 class bounded_IntVar(IntVar):
