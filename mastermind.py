@@ -290,12 +290,11 @@ class Mastermind(Frame):
         sauv_fenetre = Toplevel(self)
         sauv_fenetre.title("Sauvegarder une partie")
         Label(sauv_fenetre, text="Nom de la partie :").pack(padx=50, pady=50)
-        nom_var = StringVar()
-        entry = Entry(sauv_fenetre, textvariable=nom_var)
+        entry = Entry(sauv_fenetre)
         entry.pack(padx=10, pady=5)
 
         def sauvegarder():
-            nom_partie = nom_var.get().strip()
+            nom_partie = entry.get().strip()
             
             # Lire le fichier existant
             try:
@@ -303,8 +302,7 @@ class Mastermind(Frame):
                     data = load(f)
             except FileNotFoundError:
                 data = {}
-
-            data[nom_partie] = self.historique_ints # Ajouter la nouvelle partie
+            data[nom_partie] = ' '.join(map(str,self.historique_ints)) # Ajouter la nouvelle partie
             # Écrire dans le fichier
             with open("save.txt", "w") as f:
                 dump(data, f)
@@ -329,13 +327,13 @@ class Mastermind(Frame):
         nom_var.set(noms_parties[0])  # valeur par défaut
 
         menu = OptionMenu(choix_fenetre, nom_var, *noms_parties)
-        menu.pack(padx=100, pady=100)
+        menu.pack(ipadx=100, ipady=100,fill=BOTH)
 
         def charger_selection():
             partie = nom_var.get()
             self.rejouer()  # réinitialiser le plateau
 
-            for e in data[partie]:
+            for e in map(int,data[partie].split()):
                 self.jouer(e)  # reconstruire le plateau avec les essais sauvegardés
 
             choix_fenetre.destroy()
