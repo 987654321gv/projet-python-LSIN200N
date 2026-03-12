@@ -241,7 +241,7 @@ class Mastermind(Frame):
         else:
             for e in IA_draft.IA()[0]:
                 self.jouer(e)
-        if len(IA_draft.set_solutions_possibles)==1:
+        if len(IA_draft.set_solutions_possibles) == 1:
             print("l'ia a trouvé")
 
     def setup_menu(self):
@@ -250,11 +250,14 @@ class Mastermind(Frame):
         self.master.config(menu=menubar)
         menubar.add_command(label='Sauvegarder les options', command=self.saugarder_les_option, underline=0)
         menu_parametres = Menu(menubar)
-        menubar.add_cascade(label='Parametres', menu=menu_parametres)
+        menubar.add_cascade(label='Parametres', menu=menu_parametres, underline=0)
         for i, (param, var) in enumerate(self.parametres_vars.items()):
             self.setup_param(menu_parametres, i, param, var)
-        menubar.add_command(label="Sauvegarder la partie", command=self.sauvegarder_partie)
-        menubar.add_command(label="Charger la partie", command=self.charger_partie)
+        menu_sauvegarde = Menu(menubar)
+        menubar.add_cascade(menu=menu_sauvegarde, label="Fichier", underline=0)
+        menu_sauvegarde.add_command(label="Sauvegarder la partie", command=self.sauvegarder_partie)
+        menu_sauvegarde.add_command(label="Charger la partie", command=self.charger_partie)
+        menu_sauvegarde.add_command(label="Supprimmer une sauvegarde", command=self.delete_sauvegarde)
 
     def setup_param(self, menu: Menu, i: int, param: str, var: Variable):
         if param:
@@ -295,30 +298,33 @@ class Mastermind(Frame):
 
         def sauvegarder():
             nom_partie = entry.get().strip()
-            
+
             # Lire le fichier existant
             try:
                 with open("save.txt", "r") as f:
                     data = load(f)
             except FileNotFoundError:
                 data = {}
-            data[nom_partie] = ' '.join(map(str,self.historique_ints)) # Ajouter la nouvelle partie
+            data[nom_partie] = ' '.join(map(str, self.historique_ints))  # Ajouter la nouvelle partie
             # Écrire dans le fichier
             with open("save.txt", "w") as f:
                 dump(data, f)
             sauv_fenetre.destroy()
             messagebox.showinfo("Sauvegarde", "Partie sauvegardée avec succès !")
+
         Button(sauv_fenetre, text="Sauvegarder", command=sauvegarder).pack(padx=70, pady=50)
 
     def charger_partie(self):
         try:
             with open("save.txt", "r") as f:
                 data = load(f)
+                if len(data) == 0:
+                    raise FileNotFoundError
         except FileNotFoundError:
             messagebox.showerror("Erreur", "Aucune partie sauvegardée trouvée !")
             return
 
-         # Créer la fenêtre pour choisir la partie
+        # Créer la fenêtre pour choisir la partie
         choix_fenetre = Toplevel(self)
         choix_fenetre.title("Charger une partie")
 
@@ -327,13 +333,13 @@ class Mastermind(Frame):
         nom_var.set(noms_parties[0])  # valeur par défaut
 
         menu = OptionMenu(choix_fenetre, nom_var, *noms_parties)
-        menu.pack(ipadx=100, ipady=100,fill=BOTH)
+        menu.pack(ipadx=100, ipady=100, fill=BOTH)
 
         def charger_selection():
             partie = nom_var.get()
             self.rejouer()  # réinitialiser le plateau
 
-            for e in map(int,data[partie].split()):
+            for e in map(int, data[partie].split()):
                 self.jouer(e)  # reconstruire le plateau avec les essais sauvegardés
 
             choix_fenetre.destroy()
@@ -341,6 +347,45 @@ class Mastermind(Frame):
 
         bouton_charger = Button(choix_fenetre, text="Charger", command=charger_selection)
         bouton_charger.pack(padx=10, pady=10)
+
+    def delete_sauvegarde(self):
+        try:
+            with open("save.txt", "r") as f:
+                data = load(f)
+                if len(data) == 0:
+                    raise FileNotFoundError
+        except FileNotFoundError:
+            messagebox.showerror("Erreur", "Aucune partie sauvegardée trouvée !")
+            return
+
+        # Créer la fenêtre pour choisir la partie
+        choix_fenetre = Toplevel(self)
+        choix_fenetre.title("Supprimer une partie")
+
+        nom_var = StringVar()
+        noms_parties = list(data.keys())
+        nom_var.set(noms_parties[0])  # valeur par défaut
+
+        menu = OptionMenu(choix_fenetre, nom_var, *noms_parties)
+        menu.pack(ipadx=100, ipady=100, fill=BOTH)
+
+        def supprimer():
+            nom_partie = nom_var.get()
+
+            # Lire le fichier existant
+            try:
+                with open("save.txt", "r") as f:
+                    data = load(f)
+            except FileNotFoundError:
+                data = {}
+            del data[nom_partie]
+            # Écrire dans le fichier
+            with open("save.txt", "w") as f:
+                dump(data, f)
+            choix_fenetre.destroy()
+            messagebox.showinfo("Suppression", "Partie supprimée avec succès !")
+
+        Button(choix_fenetre, text="Supprimer", command=supprimer).pack(padx=70, pady=50)
 
 
 class bounded_IntVar(IntVar):

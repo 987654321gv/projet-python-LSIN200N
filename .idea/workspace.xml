@@ -29,7 +29,6 @@
     <list default="true" id="eff1dbb4-e10d-4ece-99b2-e8534ef815fb" name="Default Changelist" comment="système de sauvegarde&#10;&#10;correction du système de cyprien">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/save.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -429,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1773303964932</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="compactage des données de sauvegardea">
+      <created>1773321903435</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1773321903435</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,7 +468,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="anotation des intialisations" />
     <MESSAGE value="modularisation&#10;&#10;Le nombre de couleurs et d'emplacements peut désormais être modifié" />
     <MESSAGE value="ajout version alt" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
@@ -487,9 +492,14 @@
     <MESSAGE value="bugfix" />
     <MESSAGE value="bugfix&#10;&#10;résolution du bug pointé par cyprien" />
     <MESSAGE value="étiquetage des variables" />
-    <option name="LAST_COMMIT_MESSAGE" value="étiquetage des variables" />
+    <MESSAGE value="compactage des données de sauvegarde" />
+    <option name="LAST_COMMIT_MESSAGE" value="compactage des données de sauvegarde" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="267" y="19" key="#Inspections" timestamp="1773322874437">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="267" y="19" key="#Inspections/0.0.1280.680@0.0.1280.680" timestamp="1773322874437" />
     <state x="233" y="0" key="#Intentions" timestamp="1773066576448">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -502,22 +512,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="471" y="241" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog/0.0.1280.680@0.0.1280.680" timestamp="1772203938529" />
-    <state width="1259" height="217" key="GridCell.Tab.0.bottom" timestamp="1773305671711">
+    <state width="1259" height="217" key="GridCell.Tab.0.bottom" timestamp="1773322976557">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1773305671711" />
-    <state width="1259" height="217" key="GridCell.Tab.0.center" timestamp="1773305671711">
+    <state width="1259" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
+    <state width="1259" height="217" key="GridCell.Tab.0.center" timestamp="1773322976557">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1773305671711" />
-    <state width="1259" height="217" key="GridCell.Tab.0.left" timestamp="1773305671711">
+    <state width="1259" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
+    <state width="1259" height="217" key="GridCell.Tab.0.left" timestamp="1773322976557">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1773305671711" />
-    <state width="1259" height="217" key="GridCell.Tab.0.right" timestamp="1773305671711">
+    <state width="1259" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
+    <state width="1259" height="217" key="GridCell.Tab.0.right" timestamp="1773322976557">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1773305671711" />
+    <state width="1259" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
     <state x="86" y="37" key="MergeDialog" timestamp="1771945633621">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -534,10 +544,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1771773047098" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1773303971091">
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1773321919377">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1773303971091" />
+    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1773321919377" />
     <state width="647" height="347" key="XDebugger.FullValuePopup" timestamp="1773053380546">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
