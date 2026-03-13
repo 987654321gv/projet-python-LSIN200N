@@ -5,6 +5,7 @@ from tkinter import *
 import random
 from math import sqrt, ceil
 from collections import Counter
+from typing import Union
 import IA_draft
 from json import load, dump
 import re
@@ -12,6 +13,9 @@ from tkinter import messagebox
 
 
 class Mastermind(Frame):
+    parametres_vars: dict[str, Union[BooleanVar, IntVar, "bounded_IntVar", "ColorVar", "ListVar"]]
+    parametres: dict[str, Union[bool, int, str, list[str]]]
+
     def __init__(self, boss=None):
         Frame.__init__(self, boss)
         self.pack()
@@ -257,7 +261,7 @@ class Mastermind(Frame):
         menubar.add_cascade(menu=menu_sauvegarde, label="Fichier", underline=0)
         menu_sauvegarde.add_command(label="Sauvegarder la partie", command=self.sauvegarder_partie)
         menu_sauvegarde.add_command(label="Charger la partie", command=self.charger_partie)
-        menu_sauvegarde.add_command(label="Supprimmer une sauvegarde", command=self.delete_sauvegarde)
+        menu_sauvegarde.add_command(label="Supprimer une sauvegarde", command=self.delete_sauvegarde)
 
     def setup_param(self, menu: Menu, i: int, param: str, var: Variable):
         if param:
@@ -293,8 +297,8 @@ class Mastermind(Frame):
         sauv_fenetre = Toplevel(self)
         sauv_fenetre.title("Sauvegarder une partie")
         Label(sauv_fenetre, text="Nom de la partie :").pack(padx=50, pady=50)
-        entry = Entry(sauv_fenetre)
-        entry.pack(padx=10, pady=5)
+        entry = Entry(sauv_fenetre, justify=CENTER)
+        entry.pack(ipadx=10, ipady=5, fill=BOTH)
 
         def sauvegarder():
             nom_partie = entry.get().strip()
@@ -383,7 +387,7 @@ class Mastermind(Frame):
             with open("save.txt", "w") as f:
                 dump(data, f)
             choix_fenetre.destroy()
-            messagebox.showinfo("Suppression", "Partie supprimée avec succès !")
+            messagebox.showinfo("Suppression", f"Partie {nom_partie} supprimée avec succès !")
 
         Button(choix_fenetre, text="Supprimer", command=supprimer).pack(padx=70, pady=50)
 
@@ -419,6 +423,8 @@ class ColorVar(StringVar):
 
 
 class ListVar(Variable):
+    liste: list[Variable]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.liste = []

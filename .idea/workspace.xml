@@ -26,7 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eff1dbb4-e10d-4ece-99b2-e8534ef815fb" name="Default Changelist" comment="système de sauvegarde&#10;&#10;correction du système de cyprien">
+    <list default="true" id="eff1dbb4-e10d-4ece-99b2-e8534ef815fb" name="Default Changelist" comment="typing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
     </list>
@@ -435,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1773321903435</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="typing">
+      <created>1773390963184</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1773390963184</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -468,7 +475,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modularisation&#10;&#10;Le nombre de couleurs et d'emplacements peut désormais être modifié" />
     <MESSAGE value="ajout version alt" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
     <MESSAGE value="cleaning" />
@@ -493,7 +499,8 @@
     <MESSAGE value="bugfix&#10;&#10;résolution du bug pointé par cyprien" />
     <MESSAGE value="étiquetage des variables" />
     <MESSAGE value="compactage des données de sauvegarde" />
-    <option name="LAST_COMMIT_MESSAGE" value="compactage des données de sauvegarde" />
+    <MESSAGE value="typing" />
+    <option name="LAST_COMMIT_MESSAGE" value="typing" />
   </component>
   <component name="WindowStateProjectService">
     <state x="267" y="19" key="#Inspections" timestamp="1773322874437">
@@ -504,30 +511,30 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#Intentions/0.0.1280.680@0.0.1280.680" timestamp="1773066576448" />
-    <state x="51" y="25" width="1095" height="495" key="DiffContextDialog" timestamp="1773076819562">
+    <state x="51" y="25" width="1095" height="495" key="DiffContextDialog" timestamp="1773328619365">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="51" y="25" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1773076819562" />
+    <state x="51" y="25" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1773328619365" />
     <state x="471" y="241" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog" timestamp="1772203938529">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="471" y="241" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog/0.0.1280.680@0.0.1280.680" timestamp="1772203938529" />
-    <state width="1259" height="217" key="GridCell.Tab.0.bottom" timestamp="1773322976557">
+    <state width="1259" height="217" key="GridCell.Tab.0.bottom" timestamp="1773394014445">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
-    <state width="1259" height="217" key="GridCell.Tab.0.center" timestamp="1773322976557">
+    <state width="1259" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1773394014445" />
+    <state width="1259" height="217" key="GridCell.Tab.0.center" timestamp="1773394014445">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
-    <state width="1259" height="217" key="GridCell.Tab.0.left" timestamp="1773322976557">
+    <state width="1259" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1773394014445" />
+    <state width="1259" height="217" key="GridCell.Tab.0.left" timestamp="1773394014445">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
-    <state width="1259" height="217" key="GridCell.Tab.0.right" timestamp="1773322976557">
+    <state width="1259" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1773394014445" />
+    <state width="1259" height="217" key="GridCell.Tab.0.right" timestamp="1773394014445">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1773322976557" />
+    <state width="1259" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1773394014445" />
     <state x="86" y="37" key="MergeDialog" timestamp="1771945633621">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
