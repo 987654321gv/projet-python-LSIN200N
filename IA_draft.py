@@ -3,6 +3,7 @@
 """
 from collections import Counter
 import random
+from math import log2
 
 longeur = 4
 nb_couleurs = 8
@@ -29,7 +30,7 @@ def get_rep(solution, essai):
 set_solutions_possibles = set_solutions
 
 
-def IA(is_2nd_try=False):
+def IA(is_2nd_try=False, pessimiste=True):
     if is_2nd_try:
         essai = {256: (5, 6, 7, 5), 500: (5, 5, 4, 4), 976: (5, 5, 4, 4), 936: (1, 2, 0, 6), 224: (3, 2, 6, 2),
                  72: (0, 2, 4, 6), 660: (5, 1, 7, 3), 204: (2, 1, 1, 2), 216: (0, 2, 4, 6), 28: (0, 2, 4, 6),
@@ -54,7 +55,8 @@ def IA(is_2nd_try=False):
             else:
                 dict_reps[rep] = {solution}
         return essai, dict_reps
-    best = ((), {}, set())
+    best = ((), {}, 0)
+    espace_total = len(set_solutions_possibles)
     for essai in set_solutions:
         dict_reps = {}
         for solution in set_solutions_possibles:
@@ -63,8 +65,13 @@ def IA(is_2nd_try=False):
                 dict_reps[rep].add(solution)
             else:
                 dict_reps[rep] = {solution}
-        res = max(map(len, dict_reps.values()))
-        if best == ((), {}, set()) or res < best[-1]:
+        if pessimiste:
+            res = max(map(len, dict_reps.values()))
+        else:
+            res = sum(map(lambda x: log2(x) * x, map(len, dict_reps.values())))
+
+        if best == ((), {}, 0) or res < best[-1] or \
+                (res == best[-1] and essai in set_solutions_possibles and best[1] not in set_solutions_possibles):
             best = (essai, dict_reps, res)
     return best[:-1]
 
