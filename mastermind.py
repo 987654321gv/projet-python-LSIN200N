@@ -13,7 +13,7 @@ from tkinter import messagebox
 
 
 class Mastermind(Frame):
-"""
+    """
     Classe principale du jeu Mastermind avec interface graphique Tkinter.
 
     Cette classe gère :
@@ -26,22 +26,22 @@ class Mastermind(Frame):
     Attributes:
         parametres_vars (dict): Variables Tkinter associées aux paramètres.
         parametres (dict): Valeurs des paramètres du jeu.
-"""
+    """
     parametres_vars: dict[str, Union[BooleanVar, IntVar, "bounded_IntVar", "ColorVar", "ListVar"]]
     parametres: dict[str, Union[bool, int, str, list[str]]]
 
     def __init__(self, boss=None):
-    """
-    Initialise le jeu Mastermind et construit l'interface graphique.
+        """
+        Initialise le jeu Mastermind et construit l'interface graphique.
 
-    Args:
-        boss (Tk ou Frame, optionnel): Widget parent.
+        Args:
+            boss (Tk ou Frame, optionnel): Widget parent.
 
-    Effets:
-        - Charge les paramètres depuis un fichier
-        - Initialise les variables du jeu
-        - Construit le plateau et les boutons
-    """
+        Effets:
+            - Charge les paramètres depuis un fichier
+            - Initialise les variables du jeu
+            - Construit le plateau et les boutons
+        """
         Frame.__init__(self, boss)
         self.pack()
         self.parametres_vars = {"version alt": BooleanVar(),
@@ -120,19 +120,19 @@ class Mastermind(Frame):
         self.ale.grid(row=self.essais_max + 3, column=self.nb_max // 2, columnspan=1 if self.nb_couleurs % 2 else 2)
 
     def jouer(self, couleur):
-    """
-    Joue un coup en plaçant une couleur dans l'emplacement.
+        """
+        Joue un coup en plaçant une couleur dans l'emplacement.
 
-    Args:
-        couleur (int): Index de la couleur sélectionnée.
+        Args:
+            couleur (int): Index de la couleur sélectionnée.
 
-    Effets:
-        - Met à jour l'état du plateau
-        - Vérifie si un essai est complet
-        - Compare avec la réponse
-        - Affiche les indices (bien placé / mal placé)
-        - Déclenche la victoire ou la défaite si applicable
-    """
+        Effets:
+            - Met à jour l'état du plateau
+            - Vérifie si un essai est complet
+            - Compare avec la réponse
+            - Affiche les indices (bien placé / mal placé)
+            - Déclenche la victoire ou la défaite si applicable
+        """
         self.emplacements[self.emplacement_actif].configure(bg=self.couleurs[couleur])
         self.emplacement_actif += 1
         self.prec_essai.append(couleur)
@@ -217,13 +217,13 @@ class Mastermind(Frame):
         self.wipe_prec_essai()
 
     def annuler(self):
-          """
-    Annule la dernière sélection de couleur dans l'essai en cours.
+        """
+        Annule la dernière sélection de couleur dans l'essai en cours.
 
-    Effets:
-        - Supprime la dernière couleur entrée
-        - Mettre à jour l'affichage
-    """
+        Effets:
+            - Supprime la dernière couleur entrée
+            - Mettre à jour l'affichage
+        """
         if self.emplacement_actif == 0: return
         self.emplacement_actif -= 1
         self.emplacements[self.emplacement_actif].configure(bg=self.couleur_vide)
@@ -231,14 +231,13 @@ class Mastermind(Frame):
         self.historique_ints.pop()
 
     def annuler_essai(self):
-            """
-    Annule le dernier essai complet (mode triche uniquement).
-
-    Effets:
-        - Supprime les 4 dernières couleurs jouées
-        - Supprime les indices correspondants
-        - Réduit le compteur d'essais
-    """
+        """
+        Annule le dernier essai complet (mode triche uniquement).
+        Effets:
+            - Supprime les 4 dernières couleurs jouées
+            - Supprime les indices correspondants
+            - Réduit le compteur d'essais
+        """
         if len(self.historique_ints) <8 : return
         for i in range(4):
             self.historique_ints.pop()
@@ -250,26 +249,26 @@ class Mastermind(Frame):
         self.essais -= 1
         
     def saugarder_les_option(self):
-    """
-    Sauvegarde les paramètres actuels dans un fichier JSON.
+        """
+        Sauvegarde les paramètres actuels dans un fichier JSON.
 
-    Effets:
-        - Écrit les paramètres dans 'parametres.txt'
-    """
+        Effets:
+            - Écrit les paramètres dans 'parametres.txt'
+        """
         dico_params = {e: self.parametres_vars[e].get() for e in self.parametres_vars}
         with open("parametres.txt", "w") as parametres:
             dump(dico_params, parametres)
 
     def rejouer(self):
-    """
-    Réinitialise la partie pour recommencer une nouvelle partie.
+        """
+        Réinitialise la partie pour recommencer une nouvelle partie.
 
-    Effets:
-        - Réinitialise le plateau
-        - Supprime l'historique
-        - Réinitialise les variables de jeu
-        - Réactive l'IA si nécessaire
-    """
+        Effets:
+            - Réinitialise le plateau
+            - Supprime l'historique
+            - Réinitialise les variables de jeu
+            - Réactive l'IA si nécessaire
+        """
         if self.essais == -1: return
         self.emplacement_actif = 0
         self.essais = -1
@@ -294,13 +293,13 @@ class Mastermind(Frame):
             self.IA_2nd_try_opti = False
 
     def rand(self):
-    """
-    Génère une combinaison aléatoire comme réponse.
+        """
+        Génère une combinaison aléatoire comme réponse.
 
-    Effets:
-        - Initialise une nouvelle réponse aléatoire
-        - Prépare le jeu pour commencer immédiatement
-    """
+        Effets:
+            - Initialise une nouvelle réponse aléatoire
+            - Prépare le jeu pour commencer immédiatement
+        """
         self.enregister_reponce([random.randint(0, self.nb_couleurs - 1) for _ in range(len(self.emplacements))])
         self.historique_ints.extend(self.reponse)
         self.wipe_prec_essai()
@@ -308,14 +307,14 @@ class Mastermind(Frame):
         self.emplacement_actif = 0
 
     def enregister_reponce(self, reponse):
-    """
-    Enregistre la combinaison secrète à deviner.
+        """
+        Enregistre la combinaison secrète à deviner.
 
-    Effets:
-        - Définit la réponse du jeu
-        - Initialise les compteurs associés
-        - Active les boutons liés à l'IA
-    """
+        Effets:
+            - Définit la réponse du jeu
+            - Initialise les compteurs associés
+            - Active les boutons liés à l'IA
+        """
         self.master.title('jeu')
         self.reponse = reponse
         self.count_reponse = Counter(reponse)
@@ -327,38 +326,38 @@ class Mastermind(Frame):
             self.destroy_on_replay[-1].grid(row=self.essais_max + 3, column=self.fin_couleurs)
 
     def wipe_prec_essai(self):
-    """
-    Réinitialise l'essai en cours.
+        """
+        Réinitialise l'essai en cours.
 
-    Effets:
-        - Vide la liste des couleurs sélectionnées
-        - Réinitialise l'affichage des emplacements
-    """
+        Effets:
+            - Vide la liste des couleurs sélectionnées
+            - Réinitialise l'affichage des emplacements
+        """
         for e in self.emplacements:
             e.configure(bg=self.couleur_vide)
         self.prec_essai = []
 
     def suggestion(self):
-    """
-    Affiche une suggestion de coup fournie par l'IA.
+        """
+        Affiche une suggestion de coup fournie par l'IA.
 
-    Effets:
-        - Fait clignoter les boutons correspondant à une solution possible
-    """
+        Effets:
+            - Fait clignoter les boutons correspondant à une solution possible
+        """
         e = IA_draft.set_solutions_possibles.pop()
         IA_draft.set_solutions_possibles.add(e)
         for c in e:
             self.boutons_couleurs[c].flash()
 
     def IA(self):
-    """
-    Fait jouer automatiquement un coup par l'intelligence artificielle.
+        """
+        Fait jouer automatiquement un coup par l'intelligence artificielle.
 
-    Effets:
-        - Joue une combinaison suggérée par l'IA
-        - Peut optimiser le deuxième coup
-        - Indique si l'IA a trouvé la solution
-    """
+        Effets:
+            - Joue une combinaison suggérée par l'IA
+            - Peut optimiser le deuxième coup
+            - Indique si l'IA a trouvé la solution
+        """
         if self.IA_2nd_try_opti:
             for e in IA_draft.IA(True)[0]:
                 self.jouer(e)
@@ -369,14 +368,14 @@ class Mastermind(Frame):
             print("l'ia a trouvé")
 
     def setup_menu(self):
-    """
-    Crée et configure la barre de menu.
+        """
+        Crée et configure la barre de menu.
 
-    Effets:
-        - Ajoute les options de sauvegarde
-        - Ajoute les paramètres configurables
-        - Ajoute les options de gestion de fichiers
-    """
+        Effets:
+            - Ajoute les options de sauvegarde
+            - Ajoute les paramètres configurables
+            - Ajoute les options de gestion de fichiers
+        """
         self.master.option_add('*tearOff', FALSE)
         menubar = Menu(self.master)
         self.master.config(menu=menubar)
@@ -392,18 +391,18 @@ class Mastermind(Frame):
         menu_sauvegarde.add_command(label="Supprimer une sauvegarde", command=self.delete_sauvegarde)
 
     def setup_param(self, menu: Menu, i: int, param: str, var: Variable):
-    """
-    Configure un élément de menu pour un paramètre donné.
+        """
+        Configure un élément de menu pour un paramètre donné.
 
-    Args:
-        menu (Menu): Menu parent.
-        i (int): Position dans le menu.
-        param (str): Nom du paramètre.
-        var (Variable): Variable Tkinter associée.
+        Args:
+            menu (Menu): Menu parent.
+            i (int): Position dans le menu.
+            param (str): Nom du paramètre.
+            var (Variable): Variable Tkinter associée.
 
-    Effets:
-        - Ajoute dynamiquement des contrôles.
-    """
+        Effets:
+            - Ajoute dynamiquement des contrôles.
+        """
         if param:
             var.set(self.parametres[param])
         if isinstance(var, BooleanVar):
@@ -434,13 +433,13 @@ class Mastermind(Frame):
             (v.append(type(v[-1])()), self.setup_param(m, len(v) - 1, '', v[-1])))
 
     def sauvegarder_partie(self):
-    """
-    Ouvre une fenêtre pour sauvegarder la partie en cours.
+        """
+        Ouvre une fenêtre pour sauvegarder la partie en cours.
 
-    Effets:
-        - Demande un nom à l'utilisateur
-        - Enregistre l'historique des coups dans un fichier
-    """
+        Effets:
+            - Demande un nom à l'utilisateur
+            - Enregistre l'historique des coups dans un fichier
+        """
         sauv_fenetre = Toplevel(self)
         sauv_fenetre.title("Sauvegarder une partie")
         Label(sauv_fenetre, text="Nom de la partie :").pack(padx=50, pady=50)
@@ -466,14 +465,14 @@ class Mastermind(Frame):
         Button(sauv_fenetre, text="Sauvegarder", command=sauvegarder).pack(padx=70, pady=50)
 
     def charger_partie(self):
-    """
-    Charge une partie sauvegardée.
+        """
+        Charge une partie sauvegardée.
 
-    Effets:
-        - Affiche une liste des sauvegardes
-        - Recharge les coups précédents
-        - Reconstruit le plateau
-    """
+        Effets:
+            - Affiche une liste des sauvegardes
+            - Recharge les coups précédents
+            - Reconstruit le plateau
+        """
         try:
             with open("save.txt", "r") as f:
                 data = load(f)
@@ -508,13 +507,13 @@ class Mastermind(Frame):
         bouton_charger.pack(padx=10, pady=10)
 
     def delete_sauvegarde(self):
-    """
-    Supprime une sauvegarde existante.
+        """
+        Supprime une sauvegarde existante.
 
-    Effets:
-        - Permet de sélectionner une sauvegarde
-        - Supprime l'entrée correspondante du fichier
-    """
+        Effets:
+            - Permet de sélectionner une sauvegarde
+            - Supprime l'entrée correspondante du fichier
+        """
         try:
             with open("save.txt", "r") as f:
                 data = load(f)
@@ -617,12 +616,12 @@ class ListVar(Variable):
         self.liste = []
 
     def set(self, value):
-    """
-    Initialise la liste à partir de valeurs Python.
-    
-    Effets:
-        - Convertit chaque élément en Variable Tkinter adaptée.
-    """
+        """
+        Initialise la liste à partir de valeurs Python.
+        
+        Effets:
+            - Convertit chaque élément en Variable Tkinter adaptée.
+        """
         res = []
         for e in value:
             if isinstance(e, list): res.append(ListVar(e))
@@ -633,39 +632,39 @@ class ListVar(Variable):
         self.liste[:] = res
 
     def get(self):
-    """
-    Retourne la liste des valeurs.
-    """
+        """
+        Retourne la liste des valeurs.
+        """
         return [e.get() for e in self.liste]
 
     def pop(self):
-    """
-    Supprime et retourne le dernier élément.
-    """
+        """
+        Supprime et retourne le dernier élément.
+        """
         return self.liste.pop().get()
 
     def append(self, item):
-    """
-    Ajoute un élément à la liste.
-    """
+        """
+        Ajoute un élément à la liste.
+        """
         self.liste.append(item)
 
     def __getitem__(self, index):
-    """
-    Accès à un élément par index.
-    """
+        """
+        Accès à un élément par index.
+        """
         return self.liste[index]
 
     def __len__(self):
-    """
-    Retourne la taille de la liste.
-    """
+        """
+        Retourne la taille de la liste.
+        """
         return len(self.liste)
 
     def __setitem__(self, key, value):
-    """
-    Modifie la valeur d'un élément.
-    """
+        """
+        Modifie la valeur d'un élément.
+        """
         self.liste[key].set(value)
 
 
